@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function Pantry({ children }) {
+import Box from "./Box";
+import Noodle from "./Noodle";
+
+export default function Pantry() {
   return (
     <div
       className="Pantry"
@@ -9,7 +12,9 @@ export default function Pantry({ children }) {
         backgroundColor: "rgba(0,0,0,0.2)",
       }}
     >
-      {children}
+      <Box>
+        <Noodle />
+      </Box>
     </div>
   );
 }

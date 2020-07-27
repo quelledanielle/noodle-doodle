@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Workspace({ children }) {
+import Paper from "./Paper";
+
+export default function Workspace({
+  paperDimensions,
+  noodlePositions,
+  updateNoodlePosition,
+}) {
   return (
     <div
       className="Workspace"
@@ -14,7 +20,12 @@ export default function Workspace({ children }) {
         overflowX: "auto",
       }}
     >
-      {children}
+      <Paper
+        width={`${paperDimensions.width}px`}
+        height={`${paperDimensions.height}px`}
+        noodlePositions={noodlePositions}
+        updateNoodlePosition={updateNoodlePosition}
+      />
     </div>
   );
 }
