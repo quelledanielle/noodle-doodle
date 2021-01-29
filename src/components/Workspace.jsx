@@ -10,6 +10,7 @@ export default function Workspace({
   return (
     <div
       className="Workspace"
+      title="Workspace"
       style={{
         display: "flex",
         alignItems: "center",

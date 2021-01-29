@@ -4,10 +4,6 @@ import { useDrop } from "react-dnd";
 import { ItemTypes } from "../Constants";
 import Noodle from "./Noodle";
 
-function renderNoodle(position, i) {
-  return <Noodle key={i} id={i} position={position} />;
-}
-
 export default function Paper({
   width,
   height,
@@ -17,15 +13,21 @@ export default function Paper({
   const [, drop] = useDrop({
     accept: ItemTypes.NOODLE,
     drop: (item, monitor) => {
-      updateNoodlePosition(monitor.getDifferenceFromInitialOffset(), item.id);
+      updateNoodlePosition({
+        id: item.id,
+        position: monitor.getSourceClientOffset(),
+      });
     },
   });
+  function renderNoodle([id, position]) {
+    return <Noodle key={id} id={id} position={position} />;
+  }
   return (
     <div
       className="Paper"
+      title="Paper"
       ref={drop}
       style={{
-        position: "relative",
         width: width,
         height: height,
         margin: "40px auto",
@@ -33,7 +35,7 @@ export default function Paper({
         backgroundColor: "#fff",
       }}
     >
-      {noodlePositions.map(renderNoodle)}
+      {Object.entries(noodlePositions).map(renderNoodle)}
     </div>
   );
 }
