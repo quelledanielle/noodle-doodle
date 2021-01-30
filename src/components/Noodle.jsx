@@ -6,14 +6,15 @@ import { ItemTypes } from "../Constants";
 const svg = require("../images/elbow.svg");
 
 export default function Noodle({ id, position }) {
-  const [, drag] = useDrag({
+  const [, drag, preview] = useDrag({
     item: {
       id: id,
       type: ItemTypes.NOODLE,
     },
   });
 
-  let styles = { width: "80px" };
+  let width = "80px";
+  let styles = { width };
   if (position) {
     styles = {
       position: "absolute",
@@ -22,9 +23,9 @@ export default function Noodle({ id, position }) {
       ...styles,
     };
   }
-
   return (
     <div id={`Noodle${id}`} className="Noodle" ref={drag} style={styles}>
+      <div ref={preview} style={{ display: "none" }} />
       <img src={svg} alt="Elbow macaroni" />
     </div>
   );
